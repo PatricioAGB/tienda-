@@ -1,4 +1,4 @@
-package com.store.commerce.persistence.models;
+package com.store.commerce.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,27 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "orden") //nombre real de la bd
+@Table(name = "direccion_usuario") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-
-public class Orden {
+public class DireccionUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idorden;
+    @Column(name = "iddireccion_usuario")
+    private Integer idDireccionUsuario;
+
+    @ManyToOne
+    @JoinColumn(name = "iddireccion")
+    private Direccion direccion;
 
     @ManyToOne
     @JoinColumn(name = "idusuario")
     private Usuario usuario;
 
-    private Date fecha;
-
-    private Integer total;
+    private String nombre;
 
 
 }

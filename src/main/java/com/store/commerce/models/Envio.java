@@ -1,4 +1,4 @@
-package com.store.commerce.persistence.models;
+package com.store.commerce.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

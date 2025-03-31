@@ -1,4 +1,4 @@
-package com.store.commerce.persistence.models;
+package com.store.commerce.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,16 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "estado_envio") //nombre real de la bd
+@Table(name = "datos_contacto") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class EstadoEnvio {
+public class DatosContacto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idestado_envio")
-    private Integer idEstadoEnvio;
+    private Integer idContacto;
 
     private String nombre;
+
+    private String telefono;
+
+
 }

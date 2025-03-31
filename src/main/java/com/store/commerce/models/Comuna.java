@@ -1,4 +1,4 @@
-package com.store.commerce.persistence.models;
+package com.store.commerce.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,19 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "datos_contacto") //nombre real de la bd
+@Table(name = "comuna") //nombre real de la bd
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class DatosContacto {
+public class Comuna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idContacto;
+    private Integer idcomuna;
+
+    @ManyToOne
+    @JoinColumn(name = "idregion")
+    private Region region;
 
     private String nombre;
-
-    private String telefono;
-
-
 }
