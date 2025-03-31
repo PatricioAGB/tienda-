@@ -12,10 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Usuario {
+public class UsuarioModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idusuario")
+    private Integer idUsuario;
 
     @OneToOne
     @JoinColumn(name = "idtipo_usuario")

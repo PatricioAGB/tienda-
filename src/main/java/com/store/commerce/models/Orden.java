@@ -22,7 +22,7 @@ public class Orden {
 
     @ManyToOne
     @JoinColumn(name = "idusuario")
-    private Usuario usuario;
+    private UsuarioModels usuario;
 
     private Date fecha;
 

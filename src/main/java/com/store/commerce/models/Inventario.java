@@ -19,7 +19,7 @@ public class Inventario {
 
     @ManyToOne
     @JoinColumn(name = "idusuario")
-    private Usuario usuario;
+    private UsuarioModels usuario;
 
     @ManyToOne
     @JoinColumn(name = "idproducto")
