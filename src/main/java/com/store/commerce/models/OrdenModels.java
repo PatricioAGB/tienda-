@@ -6,19 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Entity
-@Table(name = "region") //nombre real de la bd
+@Table(name = "orden") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 
-public class Region {
+public class OrdenModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idorden;
 
-    private Integer idregion;
+    @ManyToOne
+    @JoinColumn(name = "idusuario")
+    private UsuarioModels usuario;
 
-    private String nombre;
+    private Date fecha;
+
+    private Integer total;
+
+
 }
-

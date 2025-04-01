@@ -6,20 +6,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
-@Table(name = "estado_pago") //nombre real de la bd
+@Table(name = "datos_contacto") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class EstadoPago {
+public class DatosContactoModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idestado_pago")
-    private Integer idEstadoPago;
+    private Integer idContacto;
 
     private String nombre;
+
+    private String telefono;
+
 
 }

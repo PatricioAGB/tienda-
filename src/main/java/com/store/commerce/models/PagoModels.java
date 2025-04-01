@@ -12,21 +12,21 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Pago {
+public class PagoModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idpago;
 
     @OneToOne
     @JoinColumn(name = "idorden")
-    private Orden orden;
+    private OrdenModels orden;
 
     @ManyToOne
     @JoinColumn(name = "idmetodo_pago")
-    private MetodoPago metodoPago;
+    private MetodoPagoModels metodoPago;
 
     @ManyToOne
     @JoinColumn(name = "idestado_pago")
-    private EstadoPago estadoPago;
+    private EstadoPagoModels estadoPago;
 
 }

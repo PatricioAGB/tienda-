@@ -7,26 +7,27 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "direccion_usuario") //nombre real de la bd
+@Table(name = "direccion") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class DireccionUsuario {
+public class DireccionModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "iddireccion_usuario")
-    private Integer idDireccionUsuario;
+    private Integer idDireccion;
+
+    @OneToOne
+    @JoinColumn(name = "idtipo_direccion")
+    private TipoDireccionModels tipoDireccion;
 
     @ManyToOne
-    @JoinColumn(name = "iddireccion")
-    private Direccion direccion;
-
-    @ManyToOne
-    @JoinColumn(name = "idusuario")
-    private UsuarioModels usuario;
+    @JoinColumn(name = "idcomuna")
+    private ComunaModels comuna;
 
     private String nombre;
 
+    private String departamento;
 
+    private String descripcion;
 }

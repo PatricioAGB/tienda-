@@ -7,15 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "categoria") //nombre real de la bd
+@Table(name = "region") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Categoria {
+
+public class RegionModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idcategoria;
+
+    private Integer idregion;
 
     private String nombre;
 }
+

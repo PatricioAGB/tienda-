@@ -19,11 +19,11 @@ public class ProductoModels {
 
     @ManyToOne
     @JoinColumn(name = "idcategoria")
-    private Categoria categoria;
+    private CategoriaModels categoria;
 
     @OneToOne
     @JoinColumn(name = "idestado_producto")
-    private EstadoProducto estadoProducto;
+    private EstadoProductoModels estadoProducto;
 
     private String nombre;
 

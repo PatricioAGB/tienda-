@@ -24,7 +24,7 @@ public class OrdenDetalle {
 
     @ManyToOne
     @JoinColumn(name = "idorden")
-    private Orden orden;
+    private OrdenModels orden;
 
     private Integer cantidad;
 

@@ -13,14 +13,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Comuna {
+public class ComunaModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idcomuna;
 
     @ManyToOne
     @JoinColumn(name = "idregion")
-    private Region region;
+    private RegionModels region;
 
     private String nombre;
 }

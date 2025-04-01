@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.EnableMBeanExport;
 
 @Entity
 @Table (name = "usuario")
@@ -21,7 +20,7 @@ public class UsuarioModels {
 
     @OneToOne
     @JoinColumn(name = "idtipo_usuario")
-    private TipoUsuario tipoUsuario;
+    private TipoUsuarioModels tipoUsuario;
 
     private String nombre;
 

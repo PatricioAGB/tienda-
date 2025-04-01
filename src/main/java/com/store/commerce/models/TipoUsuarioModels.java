@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TipoUsuario {
+public class TipoUsuarioModels {
     @Id //
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
     @Column(name = "idtipo_usuario")

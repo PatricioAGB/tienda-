@@ -6,27 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "orden") //nombre real de la bd
+@Table(name = "inventario") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-
-public class Orden {
+public class InventarioModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idorden;
+    private Integer idinventario;
 
     @ManyToOne
     @JoinColumn(name = "idusuario")
     private UsuarioModels usuario;
 
-    private Date fecha;
+    @ManyToOne
+    @JoinColumn(name = "idproducto")
+    private ProductoModels producto;
 
-    private Integer total;
-
+    private Integer stock;
 
 }

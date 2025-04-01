@@ -13,26 +13,26 @@ import lombok.Setter;
 @Getter
 @Setter
 
-public class Envio {
+public class EnvioModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idenvio;
 
     @OneToOne
     @JoinColumn(name = "iddireccion")
-    private Direccion direccion;
+    private DireccionModels direccion;
 
     @OneToOne
     @JoinColumn(name = "idestado_envio")
-    private EstadoEnvio estadoEnvio;
+    private EstadoEnvioModels estadoEnvio;
 
     @OneToOne
     @JoinColumn(name = "iddatos_contacto")
-    private DatosContacto datosContacto;
+    private DatosContactoModels datosContacto;
 
     @OneToOne
     @JoinColumn(name = "idorden")
-    private Orden orden;
+    private OrdenModels orden;
 
 
 

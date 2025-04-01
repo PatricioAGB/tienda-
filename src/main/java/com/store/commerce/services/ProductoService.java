@@ -1,7 +1,7 @@
 package com.store.commerce.services;
 
-import com.store.commerce.models.Categoria;
-import com.store.commerce.models.EstadoProducto;
+import com.store.commerce.models.CategoriaModels;
+import com.store.commerce.models.EstadoProductoModels;
 import com.store.commerce.models.ProductoModels;
 import com.store.commerce.repository.CategoriaRepository;
 import com.store.commerce.repository.EstadoProductoRepository;
@@ -34,10 +34,10 @@ public class ProductoService {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
         // Busca la categoría y el estadoProducto usando los repositorios
-        Categoria categoria = categoriaRepository.findById(request.getCategoria().getIdcategoria())
+        CategoriaModels categoria = categoriaRepository.findById(request.getCategoria().getIdcategoria())
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
 
-        EstadoProducto estadoProducto = estadoProductoRepository.findById(request.getEstadoProducto().getIdEstado())
+        EstadoProductoModels estadoProducto = estadoProductoRepository.findById(request.getEstadoProducto().getIdEstado())
                 .orElseThrow(() -> new RuntimeException("Estado de producto no encontrado"));
 
         // Actualiza las relaciones
