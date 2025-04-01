@@ -23,7 +23,7 @@ public class Inventario {
 
     @ManyToOne
     @JoinColumn(name = "idproducto")
-    private Producto producto;
+    private ProductoModels producto;
 
     private Integer stock;
 

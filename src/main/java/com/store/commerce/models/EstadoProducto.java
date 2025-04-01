@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "estado_categoria") //nombre real de la bd
+@Table(name = "estado_producto") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

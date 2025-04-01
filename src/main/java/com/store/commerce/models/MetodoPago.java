@@ -22,6 +22,5 @@ public class MetodoPago {
 
     private String nombre;
 
-    @OneToMany (mappedBy = "estadoPago")
-    private List<Pago> estadoPagos ;
+
 }
