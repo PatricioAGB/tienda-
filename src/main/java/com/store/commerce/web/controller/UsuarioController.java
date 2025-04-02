@@ -2,14 +2,17 @@ package com.store.commerce.web.controller;
 
 
 
+import com.store.commerce.dto.UsuarioDto;
 import com.store.commerce.models.UsuarioModels;
 import com.store.commerce.services.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -25,11 +28,13 @@ public class UsuarioController {
         return this.usuarioService.getUsuariosActivos();
     }
     //Agregar Usuario
-    @RequestMapping("/addUser")
-    @PostMapping // request  en el  body
-    public ResponseEntity<UsuarioModels> saveUsuario(@RequestBody UsuarioModels usuario) {
-       usuarioService.saveUsario(usuario);
-       return ResponseEntity.ok(usuario);
+    @PostMapping ("/register")// request  en el  body
+    public ResponseEntity<UsuarioModels> saveUsuario(@Valid @RequestBody UsuarioDto usuarioDto) {
+        // Intentar registrar el usuario
+        UsuarioModels nuevoUsuario = usuarioService.saveUsario(usuarioDto);
+        return ResponseEntity.ok(nuevoUsuario);
+
+
     }
     //Busca Usuario por id
     @GetMapping(path = "/{id}")
@@ -49,6 +54,15 @@ public class UsuarioController {
         } else {
             return "Usuario no encontrado o no se pudo desactivar";
         }
+    }
+    //Inicio de sesion
+    @PostMapping("/login")
+    public  ResponseEntity<String> login(@RequestBody Map<String,String> request){
+        String userOEmail = request.get("userOrEmail");
+        String contrasena = request.get("contrasena");
+
+        String response = usuarioService.login(userOEmail,contrasena);
+        return ResponseEntity.ok(response);
     }
 
 

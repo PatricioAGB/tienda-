@@ -1,10 +1,13 @@
 package com.store.commerce.services;
 
 
+import com.store.commerce.dto.UsuarioDto;
+import com.store.commerce.exceptions.UsuarioDuplicadoException;
 import com.store.commerce.repository.UsuarioRepository;
 import com.store.commerce.models.UsuarioModels;
-import org.apache.coyote.Request;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -15,19 +18,42 @@ import java.util.Optional;
 public class UsuarioService {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     UsuarioRepository usuarioRepository;
     //Buscar todos los usuarios
     public List<UsuarioModels> getUsuariosActivos() {
         return (List<UsuarioModels>) usuarioRepository.findByActivo(1);
     }
     //Agregar Usuarios
-    public UsuarioModels saveUsario(UsuarioModels usuario) {
+    public UsuarioModels saveUsario(@Valid UsuarioDto usuarioDto) {
+        if (usuarioRepository.existsByUsuario(usuarioDto.getUsuario())) {
+            throw new UsuarioDuplicadoException("El nombre de usuario ya está en uso");
+        }
+
+        if (usuarioRepository.existsByEmail(usuarioDto.getEmail())) {
+            throw new UsuarioDuplicadoException("El correo electrónico ya está registrado");
+        }
+
+        String contrasenaEncriptada = passwordEncoder.encode(usuarioDto.getContrasena());
+
+        UsuarioModels usuario = new UsuarioModels();
+        usuario.setNombre(usuarioDto.getNombre());
+        usuario.setApellido(usuarioDto.getApellido());
+        usuario.setUsuario(usuarioDto.getUsuario());
+        usuario.setEmail(usuarioDto.getEmail());
+        usuario.setContrasena(contrasenaEncriptada);
+        usuario.setActivo(usuarioDto.getActivo());
+
         return usuarioRepository.save(usuario);
     }
     //Buscar usuario por id
-    public Optional<UsuarioModels> getById(Integer id) {
-        return usuarioRepository.findById(id);
+    public Optional<UsuarioModels> getById(Integer idUsuario) {
+        return usuarioRepository.findByIdUsuarioAndActivo(idUsuario,1);
     }
+
+
     // Actualizar usuario por id
     public UsuarioModels updateById(UsuarioModels request, Integer id) {
         UsuarioModels usuario = usuarioRepository.findById(id).get();
@@ -57,4 +83,27 @@ public class UsuarioService {
         }
     }
 
+    //Iniciar Sesion
+    public String login(String userOEmail, String contrasena) {
+        //Obtener todos los usuarios activos
+        List<UsuarioModels> usuariosActivos = usuarioRepository.findByActivo(1);
+
+        //Buscar si existe el usuario con el correo o usuario ingresado
+        Optional<UsuarioModels> usuarioOpt = usuariosActivos.stream()
+                .filter(u -> u.getUsuario().equalsIgnoreCase(userOEmail) || u.getEmail().equalsIgnoreCase(userOEmail))
+                .findFirst();
+
+        if (usuarioOpt.isPresent()) {
+            UsuarioModels usuario = usuarioOpt.get();
+
+            // Verifica la contraseña
+            if(passwordEncoder.matches(contrasena, usuario.getContrasena())) {
+                return "Inicio de sesión exitoso para el usuario: " + usuario.getUsuario();
+            } else {
+                return "Contraseña incorrecta";
+            }
+        } else {
+            return "Usuario no encontrado o inactivo";
+        }
+    }
 }

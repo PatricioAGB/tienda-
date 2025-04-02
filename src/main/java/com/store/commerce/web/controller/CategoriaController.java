@@ -22,3 +22,4 @@ public class CategoriaController {
         return this.categoriaService.getCategorias();
     }
 }
+

@@ -1,11 +1,13 @@
 package com.store.commerce.services;
 
+import com.store.commerce.dto.ProductoDto;
 import com.store.commerce.models.CategoriaModels;
 import com.store.commerce.models.EstadoProductoModels;
 import com.store.commerce.models.ProductoModels;
 import com.store.commerce.repository.CategoriaRepository;
 import com.store.commerce.repository.EstadoProductoRepository;
 import com.store.commerce.repository.ProductoRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +23,20 @@ public class ProductoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    //encuentra todos los productos
     public List<ProductoModels> getProductos() {
         return productoRepository.findAll();
     }
-    public ProductoModels saveProducto(ProductoModels producto) {
-        return productoRepository.save(producto);
+    //Guardar un nuevo producto
+    public ProductoModels saveProducto(@Valid ProductoDto productoDto) {
+        ProductoModels productoModels = new ProductoModels();
+        productoModels.setIdproducto(productoDto.getIdproducto());
+        productoModels.setCategoria(productoDto.getCategoria());
+        productoModels.setNombre(productoDto.getNombre());
+        productoModels.setNombre(productoDto.getNombre());
+        productoModels.setDescripcion(productoDto.getDescripcion());
+        productoModels.setPrecio(productoDto.getPrecio());
+        return productoRepository.save(productoModels);
     }
 
     // Actualizar producto por id
@@ -51,7 +62,13 @@ public class ProductoService {
 
         // Guarda el producto actualizado
         return productoRepository.save(producto);
+
     }
+        public List<ProductoModels> getProductosByCategoria(Integer idCategoria) {
+        CategoriaModels categoria = categoriaRepository.findById(idCategoria)
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+        return productoRepository.findByCategoria(categoria);
+        }
 
 
 }
