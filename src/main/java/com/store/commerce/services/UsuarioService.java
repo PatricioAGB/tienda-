@@ -2,7 +2,7 @@ package com.store.commerce.services;
 
 
 import com.store.commerce.dto.UsuarioDto;
-import com.store.commerce.exceptions.UsuarioDuplicadoException;
+import com.store.commerce.exceptions.BadRequestException;
 import com.store.commerce.repository.UsuarioRepository;
 import com.store.commerce.models.UsuarioModels;
 import jakarta.validation.Valid;
@@ -29,16 +29,17 @@ public class UsuarioService {
     //Agregar Usuarios
     public UsuarioModels saveUsario(@Valid UsuarioDto usuarioDto) {
         if (usuarioRepository.existsByUsuario(usuarioDto.getUsuario())) {
-            throw new UsuarioDuplicadoException("El nombre de usuario ya está en uso");
+            throw new BadRequestException("El nombre de usuario ya está en uso");
         }
 
         if (usuarioRepository.existsByEmail(usuarioDto.getEmail())) {
-            throw new UsuarioDuplicadoException("El correo electrónico ya está registrado");
+            throw new BadRequestException("El correo electrónico ya está registrado");
         }
 
         String contrasenaEncriptada = passwordEncoder.encode(usuarioDto.getContrasena());
 
         UsuarioModels usuario = new UsuarioModels();
+        usuario.setTipoUsuario(usuarioDto.getTipoUsuario());
         usuario.setNombre(usuarioDto.getNombre());
         usuario.setApellido(usuarioDto.getApellido());
         usuario.setUsuario(usuarioDto.getUsuario());
