@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice //Maneja excepciones en toda la aplicacion
-public class GlobalExceptionHandler  {
+public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class) //Captura los errores de validaciones cuando @valid falla
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -25,6 +25,7 @@ public class GlobalExceptionHandler  {
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
     //Status 400 Bad_Request
     // @ResponseStatus(HttpStatus.BAD_REQUEST) // Solo Indica el status
     @ExceptionHandler(BadRequestException.class)

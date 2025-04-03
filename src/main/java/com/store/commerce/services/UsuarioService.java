@@ -5,6 +5,7 @@ import com.store.commerce.dto.UsuarioDto;
 import com.store.commerce.exceptions.BadRequestException;
 import com.store.commerce.repository.UsuarioRepository;
 import com.store.commerce.models.UsuarioModels;
+import com.store.commerce.security.JwtTokenProvider;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,14 +19,19 @@ import java.util.Optional;
 public class UsuarioService {
 
     @Autowired
+    JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
     //Buscar todos los usuarios
     public List<UsuarioModels> getUsuariosActivos() {
         return (List<UsuarioModels>) usuarioRepository.findByActivo(1);
     }
+
     //Agregar Usuarios
     public UsuarioModels saveUsario(@Valid UsuarioDto usuarioDto) {
         if (usuarioRepository.existsByUsuario(usuarioDto.getUsuario())) {
@@ -49,9 +55,10 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuario);
     }
+
     //Buscar usuario por id
     public Optional<UsuarioModels> getById(Integer idUsuario) {
-        return usuarioRepository.findByIdUsuarioAndActivo(idUsuario,1);
+        return usuarioRepository.findByIdUsuarioAndActivo(idUsuario, 1);
     }
 
 
@@ -66,6 +73,7 @@ public class UsuarioService {
         usuario.setContrasena(request.getContrasena());
         return usuario;
     }
+
     // eliminar usuario de forma logica
     public boolean deleteById(Integer id) {
         try {
@@ -85,26 +93,29 @@ public class UsuarioService {
     }
 
     //Iniciar Sesion
-    public String login(String userOEmail, String contrasena) {
-        //Obtener todos los usuarios activos
-        List<UsuarioModels> usuariosActivos = usuarioRepository.findByActivo(1);
+    public String login(String userOrEmail, String contrasena) {
+        // Buscar el usuario por usuario o correo
+        Optional<UsuarioModels> usuarioOpt = usuarioRepository.findByUsuarioOrEmailAndActivo(userOrEmail, userOrEmail,1);
 
-        //Buscar si existe el usuario con el correo o usuario ingresado
-        Optional<UsuarioModels> usuarioOpt = usuariosActivos.stream()
-                .filter(u -> u.getUsuario().equalsIgnoreCase(userOEmail) || u.getEmail().equalsIgnoreCase(userOEmail))
-                .findFirst();
-
+        // Verificar si el usuario existe
         if (usuarioOpt.isPresent()) {
             UsuarioModels usuario = usuarioOpt.get();
 
-            // Verifica la contraseña
-            if(passwordEncoder.matches(contrasena, usuario.getContrasena())) {
-                return "Inicio de sesión exitoso para el usuario: " + usuario.getUsuario();
+            // Verificar si el usuario está activo (activo == 1)
+            if (usuario.getActivo() != 1) {
+                return "Usuario no activo"; // Retornar un mensaje indicando que el usuario no está activo
+            }
+
+            // Verificar la contraseña
+            if (passwordEncoder.matches(contrasena, usuario.getContrasena())) {
+                // Si las credenciales son correctas, generar el token JWT
+                String jwt = jwtTokenProvider.generateToken(usuario.getUsuario());
+                return "Bearer " + jwt;  // Retorna el token con el prefijo 'Bearer '
             } else {
                 return "Contraseña incorrecta";
             }
         } else {
-            return "Usuario no encontrado o inactivo";
+            return "Usuario no encontrado";
         }
     }
 }

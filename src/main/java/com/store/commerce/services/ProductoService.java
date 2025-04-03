@@ -27,6 +27,7 @@ public class ProductoService {
     public List<ProductoModels> getProductos() {
         return productoRepository.findAll();
     }
+
     //Guardar un nuevo producto
     public ProductoModels saveProducto(@Valid ProductoDto productoDto) {
         ProductoModels productoModels = new ProductoModels();
@@ -65,11 +66,12 @@ public class ProductoService {
         return productoRepository.save(producto);
 
     }
-        public List<ProductoModels> getProductosByCategoria(Integer idCategoria) {
+
+    public List<ProductoModels> getProductosByCategoria(Integer idCategoria) {
         CategoriaModels categoria = categoriaRepository.findById(idCategoria)
                 .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
         return productoRepository.findByCategoria(categoria);
-        }
+    }
 
 
 }

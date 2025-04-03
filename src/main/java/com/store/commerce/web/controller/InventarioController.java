@@ -18,6 +18,7 @@ public class InventarioController {
 
     @Autowired
     InventarioService inventarioService;
+
     //Buscar Inventario
     @GetMapping
     public List<InventarioModels> getInventario() {
@@ -25,10 +26,11 @@ public class InventarioController {
     }
 
     @PostMapping("/addInventario")// request  en el  body
-    public ResponseEntity<InventarioModels> saveInventario( @RequestBody InventarioDto inventarioDto) {
+    public ResponseEntity<InventarioModels> saveInventario(@RequestBody InventarioDto inventarioDto) {
         InventarioModels inventario = inventarioService.saveInventario(inventarioDto);
         return ResponseEntity.ok(inventario);
     }
+
     @DeleteMapping(path = "/{id}")
     public String deleteUserById(@PathVariable("id") Integer id) {
         boolean ok = this.inventarioService.deleteById(id);

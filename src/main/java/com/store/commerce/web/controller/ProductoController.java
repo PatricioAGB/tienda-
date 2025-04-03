@@ -17,6 +17,7 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
+
     //Buscar Productos
     @GetMapping
     public List<ProductoModels> getProductos() {
@@ -25,7 +26,7 @@ public class ProductoController {
 
     //Agregar Producto
 
-    @PostMapping ("/addProducto")// request  en el  body
+    @PostMapping("/addProducto")// request  en el  body
     public ResponseEntity<ProductoModels> saveProducto(@Valid @RequestBody ProductoDto productoDto) {
         ProductoModels producto = productoService.saveProducto(productoDto);
         return ResponseEntity.ok(producto);
@@ -33,8 +34,8 @@ public class ProductoController {
 
     //Actualizar Producto por id
     @PutMapping(path = "/{id}")
-    public ProductoModels updateUserById(@RequestBody ProductoModels request,@PathVariable("id") Integer id) {
-        return this.productoService.updateById(request,id);
+    public ProductoModels updateUserById(@RequestBody ProductoModels request, @PathVariable("id") Integer id) {
+        return this.productoService.updateById(request, id);
     }
 
     @GetMapping("/{idCategoria}")

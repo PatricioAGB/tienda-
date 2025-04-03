@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InventarioReporitory extends JpaRepository <InventarioModels, Integer> {
+public interface InventarioReporitory extends JpaRepository<InventarioModels, Integer> {
     boolean existsByProducto(ProductoModels producto);
 }

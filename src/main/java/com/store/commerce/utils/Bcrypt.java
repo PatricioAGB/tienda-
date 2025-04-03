@@ -14,13 +14,6 @@ public class Bcrypt {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) // Permite todas las rutas sin autenticación
-                .csrf(csrf -> csrf.disable()); // Desactiva CSRF (útil para APIs REST)
 
-        return http.build();
-    }
 }
 

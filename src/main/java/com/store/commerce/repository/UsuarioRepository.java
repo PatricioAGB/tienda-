@@ -9,12 +9,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository  extends JpaRepository<UsuarioModels, Integer> {
+public interface UsuarioRepository extends JpaRepository<UsuarioModels, Integer> {
     List<UsuarioModels> findByActivo(Integer activo); //Buscar por Usuarios Activos
-    Optional<UsuarioModels> findByUsuarioOrEmail(String usuario, String email); // Buscar por usuario y email
+
+    // En tu UsuarioRepository
+     Optional<UsuarioModels> findByUsuarioOrEmailAndActivo(String usuario, String email, Integer activo);
 
     boolean existsByUsuario(String usuario); //Busca los Usuarios
+
     boolean existsByEmail(String email); // Busca los Emails
+
     //buscar por id y usuario activo
     Optional<UsuarioModels> findByIdUsuarioAndActivo(Integer idUsuario, Integer activo);
 

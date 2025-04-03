@@ -1,7 +1,6 @@
 package com.store.commerce.web.controller;
 
 
-
 import com.store.commerce.dto.UsuarioDto;
 import com.store.commerce.models.UsuarioModels;
 import com.store.commerce.services.UsuarioService;
@@ -27,25 +26,27 @@ public class UsuarioController {
     public List<UsuarioModels> getUsuariosActivos() {
         return this.usuarioService.getUsuariosActivos();
     }
+
     //Agregar Usuario
-    @PostMapping ("/register")// request  en el  body
+    @PostMapping("/register")// request  en el  body
     public ResponseEntity<UsuarioModels> saveUsuario(@Valid @RequestBody UsuarioDto usuarioDto) {
         // Intentar registrar el usuario
         UsuarioModels nuevoUsuario = usuarioService.saveUsario(usuarioDto);
         return ResponseEntity.ok(nuevoUsuario);
-
-
     }
+
     //Busca Usuario por id
     @GetMapping(path = "/{id}")
     public Optional<UsuarioModels> getUserById(@PathVariable Integer id) {
         return this.usuarioService.getById(id);
     }
+
     //Actualizar usuario por id
     @PutMapping(path = "/{id}")
-    public UsuarioModels updateUserById(@RequestBody UsuarioModels request,@PathVariable("id") Integer id) {
-        return this.usuarioService.updateById(request,id);
+    public UsuarioModels updateUserById(@RequestBody UsuarioModels request, @PathVariable("id") Integer id) {
+        return this.usuarioService.updateById(request, id);
     }
+
     @DeleteMapping(path = "/{id}")
     public String deleteUserById(@PathVariable("id") Integer id) {
         boolean ok = this.usuarioService.deleteById(id);
@@ -55,13 +56,14 @@ public class UsuarioController {
             return "Usuario no encontrado o no se pudo desactivar";
         }
     }
+
     //Inicio de sesion
-    @PostMapping("/login")
-    public  ResponseEntity<String> login(@RequestBody Map<String,String> request){
+    @PostMapping("/a")
+    public ResponseEntity<String> login(@RequestBody Map<String, String> request) {
         String userOEmail = request.get("userOrEmail");
         String contrasena = request.get("contrasena");
 
-        String response = usuarioService.login(userOEmail,contrasena);
+        String response = usuarioService.login(userOEmail, contrasena);
         return ResponseEntity.ok(response);
     }
 

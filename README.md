@@ -2,34 +2,34 @@
 
 📌 Descripción
 
-Commerce es una aplicación backend desarrollada en Java con Spring Boot para la gestión de un comercio electrónico.Permite administrar productos, usuarios y pedidos de forma eficiente mediante una arquitectura modular basada en REST APIs.
-
+Commerce es una aplicación backend desarrollada en Java con Spring Boot para la gestión de un comercio
+electrónico.Permite administrar productos, usuarios y pedidos de forma eficiente mediante una arquitectura modular
+basada en REST APIs.
 
 📂 Estructura del Proyecto
 
 commerce
 │── src
-│   ├── main
-│   │   ├── java/com/store/commerce
-│   │   │   ├── dto/              # Objetos de transferencia de datos
-│   │   │   ├── exceptions/       # Manejo de excepciones personalizadas
-│   │   │   ├── models/           # Entidades del dominio
-│   │   │   ├── repository/       # Interfaces de persistencia con Spring Data JPA
-│   │   │   ├── services/         # Lógica de negocio
-│   │   │   ├── utils/            # Clases de utilidad
-│   │   │   ├── web.controller/   # Controladores REST
-│   │   │   ├── CommerceApplication.java  # Clase principal de Spring Boot
-│   │   ├── resources
-│   │   │   ├── static/            # Recursos estáticos
-│   │   │   ├── templates/         # Plantillas HTML (si aplica)
-│   │   │   ├── application.properties  # Configuración principal
-│   │   │   ├── application-dev.properties  # Configuración de desarrollo
-│   │   │   ├── application-pdn.properties  # Configuración de producción
-│── test/  # Pruebas automatizadas
-│── build.gradle  # Configuración de Gradle
-│── README.md  # Documentación del proyecto
-│── .gitignore  # Archivos y carpetas ignoradas por Git
-
+│ ├── main
+│ │ ├── java/com/store/commerce
+│ │ │ ├── dto/ # Objetos de transferencia de datos
+│ │ │ ├── exceptions/ # Manejo de excepciones personalizadas
+│ │ │ ├── models/ # Entidades del dominio
+│ │ │ ├── repository/ # Interfaces de persistencia con Spring Data JPA
+│ │ │ ├── services/ # Lógica de negocio
+│ │ │ ├── utils/ # Clases de utilidad
+│ │ │ ├── web.controller/ # Controladores REST
+│ │ │ ├── CommerceApplication.java # Clase principal de Spring Boot
+│ │ ├── resources
+│ │ │ ├── static/ # Recursos estáticos
+│ │ │ ├── templates/ # Plantillas HTML (si aplica)
+│ │ │ ├── application.properties # Configuración principal
+│ │ │ ├── application-dev.properties # Configuración de desarrollo
+│ │ │ ├── application-pdn.properties # Configuración de producción
+│── test/ # Pruebas automatizadas
+│── build.gradle # Configuración de Gradle
+│── README.md # Documentación del proyecto
+│── .gitignore # Archivos y carpetas ignoradas por Git
 
 🚀 Tecnologías Utilizadas
 

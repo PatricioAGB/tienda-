@@ -8,7 +8,7 @@ import lombok.Setter;
 
 // creacion tabla "tipo_usuario"
 @Entity
-@Table (name = "tipo_usuario") //nombre real de la bd
+@Table(name = "tipo_usuario") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

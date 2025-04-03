@@ -33,6 +33,7 @@ public class InventarioService {
     public List<InventarioModels> getInventario() {
         return inventarioRepository.findAll();
     }
+
     //Agregar productos
     public InventarioModels saveInventario(@Valid InventarioDto inventarioDto) {
         // Obtener el usuario desde la base de datos
@@ -43,7 +44,7 @@ public class InventarioService {
                 .orElseThrow(() -> new BadRequestException("Producto no encontrado"));
         //Validar si el producto ya esta en el inventario
         boolean existeEnInventario = inventarioRepository.existsByProducto(producto);
-        if(existeEnInventario) {
+        if (existeEnInventario) {
             throw new BadRequestException("Producto ya existe en Inventario");
         }
         // Validar que el usuario sea de tipoUsuario = 2
@@ -60,6 +61,7 @@ public class InventarioService {
 
         return inventarioRepository.save(inventarioModels);
     }
+
     public boolean deleteById(Integer id) {
         try {
             Optional<InventarioModels> inventarioOpt = inventarioRepository.findById(id);
