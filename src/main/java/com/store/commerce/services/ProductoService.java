@@ -32,6 +32,7 @@ public class ProductoService {
         ProductoModels productoModels = new ProductoModels();
         productoModels.setIdproducto(productoDto.getIdproducto());
         productoModels.setCategoria(productoDto.getCategoria());
+        productoModels.setEstadoProducto(productoDto.getEstadoProducto());
         productoModels.setNombre(productoDto.getNombre());
         productoModels.setNombre(productoDto.getNombre());
         productoModels.setDescripcion(productoDto.getDescripcion());

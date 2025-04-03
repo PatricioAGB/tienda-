@@ -27,4 +27,6 @@ public class InventarioModels {
 
     private Integer stock;
 
+    private Integer estado;
+
 }

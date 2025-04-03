@@ -24,4 +24,6 @@ public class InventarioDto {
     @NotBlank
     private Integer stock;
 
+    private Integer estado;
+
 }

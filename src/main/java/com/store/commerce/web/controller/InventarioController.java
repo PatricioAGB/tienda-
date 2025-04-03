@@ -29,5 +29,13 @@ public class InventarioController {
         InventarioModels inventario = inventarioService.saveInventario(inventarioDto);
         return ResponseEntity.ok(inventario);
     }
-
+    @DeleteMapping(path = "/{id}")
+    public String deleteUserById(@PathVariable("id") Integer id) {
+        boolean ok = this.inventarioService.deleteById(id);
+        if (ok) {
+            return "Inventario eliminado";
+        } else {
+            return "inventario no encontrado o no se pudo desactivar";
+        }
+    }
 }

@@ -27,6 +27,6 @@ public class ProductoDto {
     private String nombre;
 
     private String descripcion;
-    @NotBlank(message = "Debe ingresar un precio")
+
     private Integer precio;
 }
