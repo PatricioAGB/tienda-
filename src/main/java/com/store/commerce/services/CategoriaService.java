@@ -13,6 +13,7 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     public List<CategoriaModels> getCategorias() {
+
         return categoriaRepository.findAll();
     }
 }

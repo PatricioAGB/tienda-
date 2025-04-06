@@ -45,9 +45,7 @@ public class AuthController {
 
         // Buscar el usuario activo por usuario o correo
         Optional<UsuarioModels> usuarioOpt = usuarioRepository.findByUsuarioOrEmailAndActivo(userOrEmail, userOrEmail, 1);
-        System.out.println(userOrEmail);
-        System.out.println(contrasena);
-        System.out.println(usuarioOpt);
+
         // Verificar si el usuario existe
         if (usuarioOpt.isPresent()) {
             UsuarioModels usuario = usuarioOpt.get();

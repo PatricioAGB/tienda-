@@ -27,10 +27,12 @@ public class SecurityConfig extends SecurityConfigurerAdapter {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors()
+                .and()
                 .csrf().disable()  // Deshabilitar protección CSRF
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/login").permitAll() // Permitir acceso público al endpoint de login
+                                .requestMatchers("/login","/user/register").permitAll() // Permitir acceso público al endpoint de login
                                 .anyRequest().authenticated() // Requiere autenticación para el resto de las rutas
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class); // Agregar el filtro JWT

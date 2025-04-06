@@ -1,6 +1,7 @@
 package com.store.commerce.services;
 
 
+import com.store.commerce.dto.FieldErrorDTO;
 import com.store.commerce.dto.UsuarioDto;
 import com.store.commerce.exceptions.BadRequestException;
 import com.store.commerce.repository.UsuarioRepository;
@@ -35,11 +36,13 @@ public class UsuarioService {
     //Agregar Usuarios
     public UsuarioModels saveUsario(@Valid UsuarioDto usuarioDto) {
         if (usuarioRepository.existsByUsuario(usuarioDto.getUsuario())) {
-            throw new BadRequestException("El nombre de usuario ya está en uso");
+            List<FieldErrorDTO> errors =List.of(new FieldErrorDTO("usuario","El nombre de usuario ya está en uso"));
+            throw new BadRequestException(errors);
         }
 
         if (usuarioRepository.existsByEmail(usuarioDto.getEmail())) {
-            throw new BadRequestException("El correo electrónico ya está registrado");
+            List<FieldErrorDTO> errors =List.of(new FieldErrorDTO("email","El correo electrónico ya está registrado"));
+            throw new BadRequestException(errors);
         }
 
         String contrasenaEncriptada = passwordEncoder.encode(usuarioDto.getContrasena());
@@ -86,9 +89,11 @@ public class UsuarioService {
                 return true;
             }
 
-            return false;  // Si no se encuentra el usuario
+            List<FieldErrorDTO> errors =List.of(new FieldErrorDTO("deleteUsuario","Error al eliminar el usuario"));
+            throw new BadRequestException(errors);
         } catch (Exception e) {
-            return false;  // Manejo de errores
+            List<FieldErrorDTO> errors =List.of(new FieldErrorDTO("delteUsuario","error al eliminar el usuario"));
+            throw new BadRequestException(errors);
         }
     }
 

@@ -29,4 +29,5 @@ public class ProductoDto {
     private String descripcion;
 
     private Integer precio;
+    private String imagen;
 }

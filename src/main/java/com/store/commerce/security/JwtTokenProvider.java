@@ -19,7 +19,7 @@ public class JwtTokenProvider {
     // Metodo para generar el token JWT
     public String generateToken(String user) {
         return Jwts.builder()
-                .setSubject(user) // El "usuario" es el nombre de usuario
+                .setSubject(user)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // Expira en 1 día
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

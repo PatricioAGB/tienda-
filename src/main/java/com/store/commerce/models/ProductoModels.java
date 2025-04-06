@@ -30,5 +30,6 @@ public class ProductoModels {
     private String descripcion;
 
     private Integer precio;
+    private String imagen;
 
 }

@@ -1,37 +1,49 @@
 package com.store.commerce.exceptions;
 
+import com.store.commerce.dto.FieldErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-@ControllerAdvice //Maneja excepciones en toda la aplicacion
+@ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(MethodArgumentNotValidException.class) //Captura los errores de validaciones cuando @valid falla
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
 
-        ex.getBindingResult().getAllErrors().forEach((error) -> { //Obtiene todos los errores
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
+    // Metodo para manejar errores de validación
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        BindingResult result = ex.getBindingResult();
+        List<FieldErrorDTO> errors = new ArrayList<>();
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        // Iteramos sobre los errores y los agregamos al listado
+        for (FieldError error : result.getFieldErrors()) {
+            FieldErrorDTO fieldErrorDTO = new FieldErrorDTO(error.getField(), error.getDefaultMessage());
+            errors.add(fieldErrorDTO);
+        }
+
+        return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.BAD_REQUEST);
     }
 
-    //Status 400 Bad_Request
-    // @ResponseStatus(HttpStatus.BAD_REQUEST) // Solo Indica el status
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<Map<String, String>> handleBadRequestException(BadRequestException ex) {
-        Map<String, String> response = new HashMap<>();
-        response.put("mensaje", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);//Json mas detallado
+    // Clase de respuesta para devolver los errores en el formato esperado
+    public static class ErrorResponse {
+        private List<FieldErrorDTO> errors;
+
+        public ErrorResponse(List<FieldErrorDTO> errors) {
+            this.errors = errors;
+        }
+
+        public List<FieldErrorDTO> getErrors() {
+            return errors;
+        }
+
+        public void setErrors(List<FieldErrorDTO> errors) {
+            this.errors = errors;
+        }
     }
 }
