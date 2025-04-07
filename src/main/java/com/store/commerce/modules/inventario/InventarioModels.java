@@ -1,5 +1,6 @@
-package com.store.commerce.models;
+package com.store.commerce.modules.inventario;
 
+import com.store.commerce.modules.producto.ProductoModels;
 import com.store.commerce.modules.usuario.UsuarioModels;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,27 +9,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "direccion_usuario") //nombre real de la bd
+@Table(name = "inventario") //nombre real de la bd
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class DireccionUsuarioModels {
+public class InventarioModels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "iddireccion_usuario")
-    private Integer idDireccionUsuario;
-
-    @ManyToOne
-    @JoinColumn(name = "iddireccion")
-    private DireccionModels direccion;
+    private Integer idinventario;
 
     @ManyToOne
     @JoinColumn(name = "idusuario")
     private UsuarioModels usuario;
 
-    private String nombre;
-    private Integer estado;
+    @ManyToOne
+    @JoinColumn(name = "idproducto")
+    private ProductoModels producto;
 
+    private Integer stock;
+
+    private Integer estado;
 
 }

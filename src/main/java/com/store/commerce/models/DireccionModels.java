@@ -1,5 +1,6 @@
 package com.store.commerce.models;
 
+import com.store.commerce.modules.comuna.ComunaModels;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

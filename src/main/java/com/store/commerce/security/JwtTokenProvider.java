@@ -1,7 +1,6 @@
 package com.store.commerce.security;
 
 
-import com.store.commerce.models.UsuarioModels;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 

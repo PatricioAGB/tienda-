@@ -1,6 +1,6 @@
 package com.store.commerce.exceptions;
 
-import com.store.commerce.dto.FieldErrorDTO;
+import com.store.commerce.modules.fielderror.FieldErrorDTO;
 
 import java.util.List;
 
