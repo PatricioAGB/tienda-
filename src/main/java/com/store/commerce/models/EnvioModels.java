@@ -1,5 +1,6 @@
 package com.store.commerce.models;
 
+import com.store.commerce.modules.direccion.DireccionModels;
 import com.store.commerce.modules.orden.OrdenModels;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

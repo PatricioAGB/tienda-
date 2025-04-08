@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
+
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
@@ -119,5 +120,10 @@ public class UsuarioService {
         } else {
             return "Usuario no encontrado";
         }
+
+    }
+    public UsuarioModels findByUsuario(String usuario) {
+        return usuarioRepository.findByUsuario(usuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con nombre: " + usuario));
     }
 }

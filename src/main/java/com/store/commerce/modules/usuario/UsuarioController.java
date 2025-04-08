@@ -63,6 +63,11 @@ public class UsuarioController {
         String response = usuarioService.login(userOEmail, contrasena);
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/find/{usuario}")
+    public ResponseEntity<UsuarioModels> obtenerPorNombreUsuario(@PathVariable String usuario) {
+        UsuarioModels usuarioEncontrado = usuarioService.findByUsuario(usuario);
+        return ResponseEntity.ok(usuarioEncontrado);
+    }
 
 
 }

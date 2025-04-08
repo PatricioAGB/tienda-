@@ -1,4 +1,4 @@
-package com.store.commerce.models;
+package com.store.commerce.modules.tipoDireccion;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

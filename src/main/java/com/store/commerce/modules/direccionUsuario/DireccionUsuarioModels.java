@@ -1,5 +1,6 @@
-package com.store.commerce.models;
+package com.store.commerce.modules.direccionUsuario;
 
+import com.store.commerce.modules.direccion.DireccionModels;
 import com.store.commerce.modules.usuario.UsuarioModels;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
